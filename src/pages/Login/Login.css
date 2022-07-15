@@ -1,0 +1,22 @@
+.LoginForm{
+    width: fit-content;
+    height: fit-content;
+    margin-left: 5%;
+    margin-right: auto;
+
+}
+
+.RegisterForm{
+    width:fit-content;
+    height: fit-content;
+    margin-left: auto;
+    margin-right: 5%;
+}
+
+.FormGroup{
+    margin: 10px;
+}
+
+.FormsContainer{
+    display: flex;
+}
