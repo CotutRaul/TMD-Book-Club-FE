@@ -3,11 +3,12 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
+import { CardActionArea, CircularProgress } from '@mui/material';
+import placeholderImage from '../assets/book.png'
 
 export default function BookCard(props) {
 
-  const [imageUrl, setImageUrl] = useState();
+  const [imageUrl, setImageUrl] = useState(placeholderImage);
 
   useEffect(() => {
     fetch(`https://www.googleapis.com/books/v1/volumes?q=${props.book.title}`, {
@@ -23,7 +24,7 @@ export default function BookCard(props) {
     <Card sx={{maxWidth: 200,margin: 1, flex: "1 0 200px"}}>
       <CardActionArea sx={{height: "100%"}}>
         {imageUrl &&
-        <CardMedia sx={{ maxHeight: 275 }}
+        <CardMedia sx={{height:275}}
           component="img"
           image = {imageUrl}
         />}
