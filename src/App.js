@@ -7,12 +7,17 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 
 function App() {
+
+  const checkIfLogin = () => {
+    return localStorage.getItem("user") !== null
+  }
+
+
   return (
     <Router>
       <div className='App'>
         <Routes>
-          <Route path="/" exact element={<Home/>} />
-          <Route path="/login" exact element={<Login/>} />
+          <Route path="/" exact element={checkIfLogin() ? <Home /> : <Login />} />
         </Routes>
       </div>
     </Router>

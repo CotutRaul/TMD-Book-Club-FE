@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef} from 'react'
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 function LoginForm() {
     const [user, setUser] = useState({email:"", password:""});
     const [result, setResult] = useState(null);
+    const isInitialMount = useRef(true);
 
     const HandleSubmit = e =>{
         e.preventDefault();
@@ -30,7 +31,13 @@ function LoginForm() {
     }
     
     useEffect(() => {
-      console.log(result);
+        if (isInitialMount.current) {
+            isInitialMount.current = false;
+         } else {
+            console.log(result);
+            localStorage.setItem('user', JSON.stringify(result));
+            window.location.href = "/";
+        }
     }, [result])
     
 
