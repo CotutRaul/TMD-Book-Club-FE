@@ -2,12 +2,15 @@ import React, { useState, useEffect, useRef } from 'react'
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { makeStyles } from '@mui/styles'
 
 
 function RegisterForm() {
     const [user, setUser] = useState({ name: "", email: "", password: "" });
     const [result, setResult] = useState(null);
     const isInitialMount = useRef(true);
+    const classes = useStyle()
+
 
 
     const HandleSubmit = e => {
@@ -47,11 +50,11 @@ function RegisterForm() {
 
 
     return (
-        <form className='RegisterForm' onSubmit={HandleSubmit}>
+        <form className={classes.RegisterForm} onSubmit={HandleSubmit}>
             <Paper elevation={5}>
 
-                <div className='FormGroup'><h2>Register</h2></div>
-                <div className='FormGroup'>
+                <div className={classes.FormGroup}><h2>Register</h2></div>
+                <div className={classes.FormGroup}>
                     <TextField
                         id="registerNameField"
                         label="Name"
@@ -59,7 +62,7 @@ function RegisterForm() {
                         onChange={e => setUser({ ...user, name: e.target.value })}
                     />
                 </div>
-                <div className='FormGroup'>
+                <div className={classes.FormGroup}>
                     <TextField
                         id="registerEmailField"
                         label="Email"
@@ -67,7 +70,7 @@ function RegisterForm() {
                         onChange={e => setUser({ ...user, email: e.target.value })}
                     />
                 </div>
-                <div className='FormGroup'>
+                <div className={classes.FormGroup}>
                     <TextField
                         id="registerPasswordField"
                         label="Password"
@@ -75,10 +78,23 @@ function RegisterForm() {
                         onChange={e => setUser({ ...user, password: e.target.value })}
                     />
                 </div>
-                <div className='FormGroup'><Button type='submit' variant="outlined">Register</Button></div>
+                <div className={classes.FormGroup}><Button type='submit' variant="outlined">Register</Button></div>
             </Paper>
         </form>
     )
 }
+
+const useStyle = makeStyles({
+    RegisterForm: {
+        width: "fit-content",
+        height: "fit-content",
+        marginLeft: "auto",
+        marginRight: "5%"
+    },
+
+    FormGroup: {
+        margin: "10px"
+    }
+})
 
 export default RegisterForm

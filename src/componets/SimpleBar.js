@@ -7,7 +7,6 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import BookIcon from '@mui/icons-material/Book';
@@ -125,8 +124,6 @@ const SimpleBar = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" /> */}
-            {/* <Avatar>{JSON.parse(localStorage.getItem("user")).name[0]}</Avatar> */}
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"

@@ -4,10 +4,7 @@ import Login from './pages/Login/Login';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 
-
-
 function App() {
-
   const checkIfLogin = () => {
     return localStorage.getItem("user") !== null
   }

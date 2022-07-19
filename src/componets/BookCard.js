@@ -3,21 +3,20 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea, CircularProgress } from '@mui/material';
+import { CardActionArea} from '@mui/material';
 import placeholderImage from '../assets/book.png'
 
 export default function BookCard(props) {
 
-  const [imageUrl, setImageUrl] = useState(placeholderImage);
+  const [imageUrl, setImageUrl] = useState();
 
   useEffect(() => {
     fetch(`https://www.googleapis.com/books/v1/volumes?q=${props.book.title}`, {
       method: "GET"
     })
       .then(res => res.json())
-      .then(jsonResult => setImageUrl(jsonResult.items[0].volumeInfo.imageLinks.thumbnail))
+      .then(jsonResult => setImageUrl(jsonResult.items[0].volumeInfo.imageLinks?.thumbnail ?? placeholderImage))
     }, [])
-
   
 
   return (

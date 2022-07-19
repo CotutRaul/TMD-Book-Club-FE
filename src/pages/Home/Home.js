@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import NavBar from '../../componets/NavBar'
-import BookCard from '../../componets/BookCard'
-import "./Home.css"
+import BookList from '../../componets/BookList'
 
 function Home() {
   const [books, setBooks] = useState(null);
@@ -15,18 +14,11 @@ function Home() {
       .then(jsonResult => setBooks(jsonResult))
   }, [])
 
-  const generateBookCards = () =>{
-
-  }
-
 
   return (
     <div>
       <NavBar />
-      <div className='BookList'>
-        {books && books.map((book) =>
-          <BookCard key={book.id} book = {book}/>)}
-      </div>
+      <BookList books = {books}></BookList>
     </div>
   )
 }
