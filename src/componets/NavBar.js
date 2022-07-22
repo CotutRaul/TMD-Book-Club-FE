@@ -35,6 +35,9 @@ const NavBar = () => {
     if (event === "My books") {
       window.location.href = "/myBooks";
     }
+    if (event === "My rented") {
+      window.location.href = "/myRented";
+    }
     if (event === "Logout") {
       localStorage.removeItem("user")
       window.location.href = "/";

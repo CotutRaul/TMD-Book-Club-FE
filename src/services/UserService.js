@@ -2,16 +2,6 @@ import axios from "axios"
 
 const apiUrl = 'http://localhost:8080/users'
 
-export const getMyBooks = async (props) => {
-    const url = apiUrl + '/myBooks?id=' + props.id
-    const response = await axios.get(url)
-    if (response.status === 200) {
-        return response.data
-    }
-    else {
-        return null
-    }
-}
 
 
 export const getUserByEmailAndPassword = async (props) => {
@@ -32,7 +22,7 @@ export const getUserByEmailAndPassword = async (props) => {
 
 export const addUser = async (props) => {
     const response = await axios.post(apiUrl, props)
-        .catch(error => {
+    .catch(error => {
             if (error.response.status === 400) {
                 alert("Wrong data inserted")
             }
@@ -46,4 +36,24 @@ export const addUser = async (props) => {
     return null
 }
 
+export const getMyBooks = async (props) => {
+    const url = apiUrl + '/myBooks?id=' + props.id
+    const response = await axios.get(url)
+    if (response.status === 200) {
+        return response.data
+    }
+    else {
+        return null
+    }
+}
 
+export const getMyRented = async (props) => {
+    const url = apiUrl + '/myRented?id=' + props.id
+    const response = await axios.get(url)
+    if (response.status === 200) {
+        return response.data
+    }
+    else {
+        return null
+    }
+}
