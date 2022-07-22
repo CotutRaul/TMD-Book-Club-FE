@@ -1,26 +1,27 @@
 import React, { useState, useEffect } from 'react'
 import BookList from '../../componets/BookList'
-import { getAllBookInfo } from '../../services/BookInfoService'
+import { getMyBooks } from '../../services/UserService'
 
 
-function Home() {
+
+
+function MyBooks() {
   const [books, setBooks] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      setBooks(await getAllBookInfo())
+      setBooks(await getMyBooks({ id: 1 }))
     }
 
     fetchData()
-
   }, [])
 
-  return (
 
+  return (
     <div>
       <BookList books={books}></BookList>
     </div>
   )
 }
 
-export default Home
+export default MyBooks

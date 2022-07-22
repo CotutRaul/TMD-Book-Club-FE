@@ -4,7 +4,7 @@ import BookCard from './BookCard'
 
 
 function BookList(props) {
-    const classes=useStyle()
+    const classes = useStyle()
     return (
         <div className={classes.bookList} >
             {props.books && props.books.map((book) =>
@@ -15,7 +15,7 @@ function BookList(props) {
 
 
 const useStyle = makeStyles({
-    bookList:{
+    bookList: {
         display: "flex",
         flexWrap: "wrap"
     }

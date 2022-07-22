@@ -2,6 +2,9 @@ import React from 'react';
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import MyBooks from './pages/Profile/MyBooks'
+import NavBar from './componets/NavBar';
+import SimpleBar from './componets/SimpleBar';
 
 
 function App() {
@@ -12,9 +15,12 @@ function App() {
 
   return (
     <Router>
+      {checkIfLogin() ? <NavBar /> : <SimpleBar />}
       <div className='App'>
         <Routes>
-          <Route path="/" exact element={checkIfLogin() ? <Home /> : <Login />} />
+
+          <Route path='/' exact element={checkIfLogin() ? <Home /> : <Login />} />
+          <Route path='/myBooks' exact element={<MyBooks></MyBooks>}></Route>
         </Routes>
       </div>
     </Router>

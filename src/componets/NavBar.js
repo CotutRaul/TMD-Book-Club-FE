@@ -12,7 +12,6 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import BookIcon from '@mui/icons-material/Book';
-import userEvent from '@testing-library/user-event';
 
 const pages = ['Books', 'Rent Now'];
 const settings = ['My books', 'My rented', 'Logout'];
@@ -22,24 +21,21 @@ const NavBar = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
-    console.log("handleOpenNavMenu")
     setAnchorElNav(event.currentTarget);
   };
   const handleOpenUserMenu = (event) => {
-    console.log("handleOpenUserMenu")
     setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
-    console.log("handleCloseNavMenu")
-    
     setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = (event) => {
-    console.log("handleCloseUserMenu")
-    if(event==="Logout")
-    {
+    if (event === "My books") {
+      window.location.href = "/myBooks";
+    }
+    if (event === "Logout") {
       localStorage.removeItem("user")
       window.location.href = "/";
     }

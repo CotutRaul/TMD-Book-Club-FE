@@ -3,6 +3,8 @@ import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { makeStyles } from '@mui/styles'
+import { addUser } from '../../services/UserService'
+
 
 
 function RegisterForm() {
@@ -18,23 +20,11 @@ function RegisterForm() {
 
         if (user.name.length * user.email.length * user.password.length > 0) {
 
-            fetch('http://localhost:8080/users', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(user)
-            })
-                .then(res => {
-                    if (res.status === 201) {
-                        res.json().then(jsonResult => setResult(jsonResult))
-                    }
-                    if (res.status === 400) {
-                        alert("Wrong data inserted")
-                    }
-                })
+            const fetchData = async () => {
+                setResult(await addUser(user))
+            }
 
+            fetchData()
         }
     }
 
@@ -42,7 +32,6 @@ function RegisterForm() {
         if (isInitialMount.current) {
             isInitialMount.current = false;
         } else {
-            console.log(result);
             localStorage.setItem('user', JSON.stringify(result));
             window.location.href = "/";
         }

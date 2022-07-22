@@ -3,6 +3,7 @@ import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { makeStyles } from '@mui/styles'
+import { getUserByEmailAndPassword } from '../../services/UserService'
 
 
 
@@ -17,26 +18,17 @@ function LoginForm() {
     const HandleSubmit = e => {
         e.preventDefault();
 
-        fetch(`http://localhost:8080/users?email=${user.email}&password=${user.password}`, {
-            method: "GET"
-        })
-            .then(res => {
-                if (res.status === 200) {
-                    res.json().then(jsonResult => setResult(jsonResult))
-                }
-                if (res.status === 204) {
-                    alert("Wrong data inserted")
-                }
-            })
+        const fetchData = async () => {
+            setResult(await getUserByEmailAndPassword({ email: user.email, password: user.password }))
+        }
 
-
+        fetchData()
     }
 
     useEffect(() => {
         if (isInitialMount.current) {
             isInitialMount.current = false;
         } else {
-            console.log(result);
             localStorage.setItem('user', JSON.stringify(result));
             window.location.href = "/";
         }
