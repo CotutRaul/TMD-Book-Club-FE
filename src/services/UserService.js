@@ -14,6 +14,7 @@ export const getUserByEmailAndPassword = async (props) => {
     }
     if (response.status === 204) {
         alert("Wrong data inserted")
+        return null
     }
 
     return null
@@ -22,7 +23,7 @@ export const getUserByEmailAndPassword = async (props) => {
 
 export const addUser = async (props) => {
     const response = await axios.post(apiUrl, props)
-    .catch(error => {
+        .catch(error => {
             if (error.response.status === 400) {
                 alert("Wrong data inserted")
             }
@@ -42,9 +43,9 @@ export const getMyBooks = async (props) => {
     if (response.status === 200) {
         return response.data
     }
-    else {
-        return null
-    }
+
+    return null
+
 }
 
 export const getMyRented = async (props) => {
@@ -53,7 +54,6 @@ export const getMyRented = async (props) => {
     if (response.status === 200) {
         return response.data
     }
-    else {
-        return null
-    }
+
+    return null
 }

@@ -1,15 +1,19 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useRef } from 'react'
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { makeStyles } from '@mui/styles'
 import { addUser } from '../../services/UserService'
+import { useDispatch } from "react-redux"
+import { login } from "../../state/slices/userSlice"
 
 
 
 function RegisterForm() {
-    const [user, setUser] = useState({ name: "", email: "", password: "" });
+    const [userDataInput, setUserDataInput] = useState({ name: "", email: "", password: "" });
     const [result, setResult] = useState(null);
+    const dispatch = useDispatch()
     const isInitialMount = useRef(true);
     const classes = useStyle()
 
@@ -18,10 +22,10 @@ function RegisterForm() {
     const HandleSubmit = e => {
         e.preventDefault();
 
-        if (user.name.length * user.email.length * user.password.length > 0) {
+        if (userDataInput.name.length * userDataInput.email.length * userDataInput.password.length > 0) {
 
             const fetchData = async () => {
-                setResult(await addUser(user))
+                setResult(await addUser(userDataInput))
             }
 
             fetchData()
@@ -32,8 +36,7 @@ function RegisterForm() {
         if (isInitialMount.current) {
             isInitialMount.current = false;
         } else {
-            localStorage.setItem('user', JSON.stringify(result));
-            window.location.href = "/";
+            dispatch(login(result))
         }
     }, [result])
 
@@ -48,7 +51,7 @@ function RegisterForm() {
                         id="registerNameField"
                         label="Name"
                         type="text"
-                        onChange={e => setUser({ ...user, name: e.target.value })}
+                        onChange={e => setUserDataInput({ ...userDataInput, name: e.target.value })}
                     />
                 </div>
                 <div className={classes.FormGroup}>
@@ -56,7 +59,7 @@ function RegisterForm() {
                         id="registerEmailField"
                         label="Email"
                         type="email"
-                        onChange={e => setUser({ ...user, email: e.target.value })}
+                        onChange={e => setUserDataInput({ ...userDataInput, email: e.target.value })}
                     />
                 </div>
                 <div className={classes.FormGroup}>
@@ -64,7 +67,7 @@ function RegisterForm() {
                         id="registerPasswordField"
                         label="Password"
                         type="password"
-                        onChange={e => setUser({ ...user, password: e.target.value })}
+                        onChange={e => setUserDataInput({ ...userDataInput, password: e.target.value })}
                     />
                 </div>
                 <div className={classes.FormGroup}><Button type='submit' variant="outlined">Register</Button></div>

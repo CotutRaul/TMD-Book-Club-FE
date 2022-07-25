@@ -12,6 +12,11 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import BookIcon from '@mui/icons-material/Book';
+import { useDispatch, useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom";
+import { logout } from "../state/slices/userSlice"
+
+
 
 const pages = ['Books', 'Rent Now'];
 const settings = ['My books', 'My rented', 'Logout'];
@@ -19,6 +24,11 @@ const settings = ['My books', 'My rented', 'Logout'];
 const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const user = useSelector((state) => state.user.value)
+  const dispatch = useDispatch()
+
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -33,14 +43,13 @@ const NavBar = () => {
 
   const handleCloseUserMenu = (event) => {
     if (event === "My books") {
-      window.location.href = "/myBooks";
+      navigate('/myBooks');
     }
     if (event === "My rented") {
-      window.location.href = "/myRented";
+      navigate('/myRented');
     }
     if (event === "Logout") {
-      localStorage.removeItem("user")
-      window.location.href = "/";
+      dispatch(logout())
     }
     setAnchorElUser(null);
   };
@@ -54,8 +63,9 @@ const NavBar = () => {
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            onClick={() => { navigate('/'); }}
             sx={{
+              cursor: 'pointer',
               mr: 2,
               display: { xs: 'none', md: 'flex' },
               fontFamily: 'monospace',
@@ -67,7 +77,6 @@ const NavBar = () => {
           >
             TMD-Book-Club
           </Typography>
-
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -138,7 +147,7 @@ const NavBar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar>{JSON.parse(localStorage.getItem("user")).name[0]}</Avatar>
+                <Avatar>{user.name[0]}</Avatar>
               </IconButton>
             </Tooltip>
             <Menu

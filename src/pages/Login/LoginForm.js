@@ -1,25 +1,30 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useRef } from 'react'
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { makeStyles } from '@mui/styles'
 import { getUserByEmailAndPassword } from '../../services/UserService'
+import { useDispatch } from "react-redux"
+import { login } from "../../state/slices/userSlice"
 
 
 
 
 function LoginForm() {
-    const [user, setUser] = useState({ email: "", password: "" });
+    const [userDataInput, setUserDataInput] = useState({ email: "", password: "" });
     const [result, setResult] = useState(null);
+    const dispatch = useDispatch()
     const isInitialMount = useRef(true);
     const classes = useStyle()
+
 
 
     const HandleSubmit = e => {
         e.preventDefault();
 
         const fetchData = async () => {
-            setResult(await getUserByEmailAndPassword({ email: user.email, password: user.password }))
+            setResult(await getUserByEmailAndPassword({ email: userDataInput.email, password: userDataInput.password }))
         }
 
         fetchData()
@@ -29,8 +34,7 @@ function LoginForm() {
         if (isInitialMount.current) {
             isInitialMount.current = false;
         } else {
-            localStorage.setItem('user', JSON.stringify(result));
-            window.location.href = "/";
+            dispatch(login(result))
         }
     }, [result])
 
@@ -46,7 +50,7 @@ function LoginForm() {
                         id="loginEmailField"
                         label="Email"
                         type="email"
-                        onChange={e => setUser({ ...user, email: e.target.value })}
+                        onChange={e => setUserDataInput({ ...userDataInput, email: e.target.value })}
                     />
                 </div>
                 <div className={classes.FormGroup}>
@@ -54,7 +58,7 @@ function LoginForm() {
                         id="loginPasswordField"
                         label="Password"
                         type="password"
-                        onChange={e => setUser({ ...user, password: e.target.value })}
+                        onChange={e => setUserDataInput({ ...userDataInput, password: e.target.value })}
                     />
                 </div>
                 <div className={classes.FormGroup}><Button type="submit" variant="outlined">Login</Button></div>
