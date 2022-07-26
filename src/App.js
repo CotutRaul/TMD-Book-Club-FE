@@ -19,7 +19,6 @@ function App() {
 
   return (
     <Router>
-      {console.log(user)}
       {checkIfLogin() ? <NavBar /> : <SimpleBar />}
       <div className='App'>
         <Routes>

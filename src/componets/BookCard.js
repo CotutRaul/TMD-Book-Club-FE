@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -10,6 +11,7 @@ export default function BookCard(props) {
 
   const [imageUrl, setImageUrl] = useState();
 
+  
   useEffect(() => {
     fetch(`https://www.googleapis.com/books/v1/volumes?q=${props.book?.title ?? props.book.info.title}`, {
       method: "GET"
@@ -21,7 +23,7 @@ export default function BookCard(props) {
 
   return (
     <Card sx={{ maxWidth: 200, margin: 1, flex: "1 0 200px" }}>
-      <CardActionArea sx={{ height: "100%" }}>
+      <CardActionArea sx={{ height: "100%" }} onClick = {()=>props.action(true, props.book)}>
         {imageUrl &&
           <CardMedia sx={{ height: 275 }}
             component="img"

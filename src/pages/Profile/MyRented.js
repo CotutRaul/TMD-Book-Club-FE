@@ -1,14 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react'
 import BookList from '../../componets/BookList'
-import { getMyRented } from '../../services/UserService'
+import { getMyRented } from '../../services/userService'
 import { useSelector } from "react-redux"
+import { ExtendRentPopup } from '../../features/ExtendRentPopup'
 
 
 const MyRented = () => {
   const [books, setBooks] = useState(null);
   const user = useSelector((state) => state.user.value)
 
+  const [openExtendRentPopup, setOpenExtendRentPopup] = useState(false)
+  const [book, setBook] = useState(null)
+  
   useEffect(() => {
     const fetchData = async () => {
       setBooks(await getMyRented({ id: user.id }))
@@ -17,11 +21,28 @@ const MyRented = () => {
     fetchData()
   }, [])
 
+  const handleAction = (open, book) => {
+    setOpenExtendRentPopup(open)
+    setBook(book)
+  }
+
+  const renderExtendRentPopup = () => {
+    return <ExtendRentPopup open={openExtendRentPopup} book={book} action={handleAction}/>
+  }
+
+
+  useEffect(() => {
+    console.log(book, openExtendRentPopup)
+  }, [book, openExtendRentPopup])
+
+
   return (
     <div>
       <h1>My Rented:</h1>
-      <BookList books={books}></BookList>
+      <BookList books={books} action={handleAction} ></BookList>
+      {renderExtendRentPopup()}
     </div>
+
   )
 
 }

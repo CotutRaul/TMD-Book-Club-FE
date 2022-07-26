@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import BookList from '../../componets/BookList'
-import { getAllBookInfo } from '../../services/BookInfoService'
+import { getAllBookInfo } from '../../services/bookInfoService'
 
 
 function Home() {

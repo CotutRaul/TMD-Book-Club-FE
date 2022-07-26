@@ -8,7 +8,7 @@ function BookList(props) {
     return (
         <div className={classes.bookList} >
             {props.books && props.books.map((book) =>
-                <BookCard key={book.id} book={book} />)}
+                <BookCard key={book.id} book={book} action={props.action}/>)}
         </div>
     )
 }

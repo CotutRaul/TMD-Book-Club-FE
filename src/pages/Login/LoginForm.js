@@ -4,7 +4,7 @@ import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { makeStyles } from '@mui/styles'
-import { getUserByEmailAndPassword } from '../../services/UserService'
+import { getUserByEmailAndPassword } from '../../services/userService'
 import { useDispatch } from "react-redux"
 import { login } from "../../state/slices/userSlice"
 

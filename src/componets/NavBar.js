@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -22,8 +22,8 @@ const pages = ['Books', 'Rent Now'];
 const settings = ['My books', 'My rented', 'Logout'];
 
 const NavBar = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
 
   const user = useSelector((state) => state.user.value)
   const dispatch = useDispatch()
@@ -50,6 +50,7 @@ const NavBar = () => {
     }
     if (event === "Logout") {
       dispatch(logout())
+      navigate('/')
     }
     setAnchorElUser(null);
   };
