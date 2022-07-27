@@ -12,14 +12,14 @@ const MyRented = () => {
 
   const [openExtendRentPopup, setOpenExtendRentPopup] = useState(false)
   const [book, setBook] = useState(null)
-  
+
   useEffect(() => {
     const fetchData = async () => {
       setBooks(await getMyRented({ id: user.id }))
     }
 
     fetchData()
-  }, [])
+  }, [openExtendRentPopup])
 
   const handleAction = (open, book) => {
     setOpenExtendRentPopup(open)
@@ -27,20 +27,15 @@ const MyRented = () => {
   }
 
   const renderExtendRentPopup = () => {
-    return <ExtendRentPopup open={openExtendRentPopup} book={book} action={handleAction}/>
+    return <ExtendRentPopup open={openExtendRentPopup} book={book} action={handleAction} />
   }
-
-
-  useEffect(() => {
-    console.log(book, openExtendRentPopup)
-  }, [book, openExtendRentPopup])
-
 
   return (
     <div>
       <h1>My Rented:</h1>
-      <BookList books={books} action={handleAction} ></BookList>
       {renderExtendRentPopup()}
+      <BookList books={books} action={handleAction} ></BookList>
+
     </div>
 
   )

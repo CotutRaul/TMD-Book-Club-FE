@@ -8,6 +8,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
+import { extendRent } from '../services/rentsService'
 
 
 
@@ -26,16 +27,21 @@ const style = {
 
 export const ExtendRentPopup = (props) => {
     const [open, setOpen] = useState(false);
-    const handleClose = () => { setOpen(false); props.action(false, null); setWeeks("")};
-
     const [weeks, setWeeks] = useState("");
 
-    const handleChange = (event) => {
-      setWeeks(event.target.value);
-    };
+    const handleClose = () => { setOpen(false); props.action(false, null); setWeeks("") };
 
-    const handleSubmit = () => {
-        console.log(weeks);
+    const handleClick = () => {
+        const fetchData = async () => {
+            extendRent({ id: props.book.id, period: weeks })
+        }
+        if (weeks !== "") {
+            fetchData()
+            handleClose()
+        }
+        else {
+            alert("Select period")
+        }
     };
 
     useEffect(() => {
@@ -55,27 +61,27 @@ export const ExtendRentPopup = (props) => {
                     <Typography id="modal-modal-title" variant="h4" component="h2">
                         Extend Rent
                     </Typography>
-                    <div style={{ display: 'flex'}}>
+                    <div style={{ display: 'flex' }}>
 
                         <BookCard book={props.book} />
                         <div>
-                            <Box sx={{ minWidth: 120, padding:"20px"}}>
-                                <FormControl fullWidth >
+                            <Box sx={{ minWidth: 120, padding: "20px" }}>
+                                <FormControl fullWidth>
                                     <InputLabel id="weeks-select-label">Weeks</InputLabel>
                                     <Select
                                         labelId="weeks-select-label"
                                         id="weeks-select"
                                         value={weeks}
                                         label="Weeks"
-                                        onChange={handleChange}
+                                        onChange={(e) => { setWeeks(e.target.value) }}
                                     >
                                         <MenuItem value={1}>One</MenuItem>
                                         <MenuItem value={2}>Two</MenuItem>
                                     </Select>
-                                    <br/>
-                                    <Button variant="outlined" onClick={handleSubmit}>Extend Rent</Button>
+                                    <br />
+                                    <Button variant="outlined" onClick={handleClick}>Extend Rent</Button>
                                 </FormControl>
-                            </Box>  
+                            </Box>
                         </div>
                     </div>
                 </Box>
