@@ -71,6 +71,7 @@ function RegisterForm() {
                     />
                 </div>
                 <div className={classes.FormGroup}><Button type='submit' variant="outlined">Register</Button></div>
+                <br/>
             </Paper>
         </form>
     )

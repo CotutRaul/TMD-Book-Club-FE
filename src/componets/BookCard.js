@@ -23,12 +23,11 @@ export default function BookCard(props) {
 
   return (
     <Card sx={{ maxWidth: 200, margin: 1, flex: "1 0 200px" }}>
-      <CardActionArea sx={{ height: "100%" }} onClick = {()=>props.action(true, props.book)}>
-        {imageUrl &&
+      <CardActionArea disabled={!props.action} sx={{ height: "100%" }} onClick = {()=>props.action(true, props.book)}>
           <CardMedia sx={{ height: 275 }}
             component="img"
             image={imageUrl}
-          />}
+          />
         <CardContent sx={{ height: "100%" }}>
           <Typography gutterBottom variant="h5" component="div">
             {props.book?.title ?? props.book.info.title}

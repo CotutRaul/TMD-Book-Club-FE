@@ -62,6 +62,7 @@ function LoginForm() {
                     />
                 </div>
                 <div className={classes.FormGroup}><Button type="submit" variant="outlined">Login</Button></div>
+                <br/>
 
             </Paper>
         </form>
