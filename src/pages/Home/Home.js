@@ -22,11 +22,10 @@ export const Home = () => {
 
   return (
     <div>
-      
-      <div>
+
+      <div className={classes.searchField}>
         <TextField
           id="searchField"
-          className={classes.searchField}
           label="Search"
           type="text"
           onChange={e => setSearch(e.target.value)}
@@ -39,10 +38,10 @@ export const Home = () => {
 
 const useStyle = makeStyles({
   searchField: {
-    marginTop: "20px",
-    marginBottom: "10px",
-    marginLeft: "5px",
-    width: "300px"
+    "& .MuiTextField-root": {
+      margin: "20px 0 10px 5px",
+      width: "300px",
+    },
   }
 })
 
