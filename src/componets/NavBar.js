@@ -21,7 +21,7 @@ import { logout } from "../state/slices/userSlice"
 const pages = ['Books', 'Rent Now'];
 const settings = ['My books', 'My rented', 'Logout'];
 
-const NavBar = () => {
+export const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -179,4 +179,4 @@ const NavBar = () => {
     </AppBar>
   );
 };
-export default NavBar;
+

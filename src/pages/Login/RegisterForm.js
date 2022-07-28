@@ -10,7 +10,7 @@ import { login } from "../../state/slices/userSlice"
 
 
 
-function RegisterForm() {
+export const RegisterForm = () => {
     const [userDataInput, setUserDataInput] = useState({ name: "", email: "", password: "" });
     const [result, setResult] = useState(null);
     const dispatch = useDispatch()

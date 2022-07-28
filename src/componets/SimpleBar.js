@@ -14,7 +14,7 @@ import BookIcon from '@mui/icons-material/Book';
 const pages = [];
 const settings = [];
 
-const SimpleBar = () => {
+export const SimpleBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -152,4 +152,3 @@ const SimpleBar = () => {
     </AppBar>
   );
 };
-export default SimpleBar;

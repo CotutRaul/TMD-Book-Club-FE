@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react'
-import BookList from '../../componets/BookList'
+import { BookList } from '../../componets/BookList'
 import TextField from '@mui/material/TextField';
 import { makeStyles } from '@mui/styles'
 import { getAllBookInfo } from '../../services/bookInfoService'
 
 
-function Home() {
+export const Home = () => {
   const [books, setBooks] = useState(null);
   const [search, setSearch] = useState("");
   const classes = useStyle()
@@ -46,4 +46,3 @@ const useStyle = makeStyles({
   }
 })
 
-export default Home

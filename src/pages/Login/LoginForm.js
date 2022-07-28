@@ -11,7 +11,7 @@ import { login } from "../../state/slices/userSlice"
 
 
 
-function LoginForm() {
+export const LoginForm = () => {
     const [userDataInput, setUserDataInput] = useState({ email: "", password: "" });
     const [result, setResult] = useState(null);
     const dispatch = useDispatch()
@@ -81,5 +81,3 @@ const useStyle = makeStyles({
         margin: "10px"
     }
 })
-
-export default LoginForm

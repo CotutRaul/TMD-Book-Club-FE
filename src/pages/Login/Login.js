@@ -1,11 +1,11 @@
 import React from 'react'
-import LoginForm from './LoginForm'
-import RegisterForm from './RegisterForm'
+import { LoginForm } from './LoginForm'
+import { RegisterForm } from './RegisterForm'
 import { makeStyles } from '@mui/styles'
 
 
 
-function Login() {
+export const Login = () => {
   const classes = useStyle()
   return (
     <div>
@@ -23,5 +23,3 @@ const useStyle = makeStyles({
     display: "flex"
   }
 })
-
-export default Login

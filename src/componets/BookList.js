@@ -1,9 +1,9 @@
 import { makeStyles } from '@mui/styles'
 import React from 'react'
-import BookCard from './BookCard'
+import { BookCard } from './BookCard'
 
 
-function BookList(props) {
+export const BookList = (props) => {
     const classes = useStyle()
     return (
         <div className={classes.bookList} >
@@ -19,8 +19,6 @@ function BookList(props) {
 const useStyle = makeStyles({
     bookList: {
         display: "flex",
-        flexWrap: "wrap"
+        flexWrap: "wrap",
     }
 })
-
-export default BookList

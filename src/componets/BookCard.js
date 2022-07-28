@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import placeholderImage from '../assets/book.png'
 
-export default function BookCard(props) {
+export const BookCard = (props) => {
 
   const [imageUrl, setImageUrl] = useState();
 
