@@ -13,7 +13,7 @@ export const BookCard = (props) => {
 
   
   useEffect(() => {
-    fetch(`https://www.googleapis.com/books/v1/volumes?q=${props.book?.title ?? props.book.info.title}`, {
+    fetch(`https://www.googleapis.com/books/v1/volumes?q=${props.book.info.title}`, {
       method: "GET"
     })
       .then(res => res.json())
@@ -30,10 +30,10 @@ export const BookCard = (props) => {
           />
         <CardContent sx={{ height: "100%" }}>
           <Typography gutterBottom variant="h5" component="div">
-            {props.book?.title ?? props.book.info.title}
+            {props.book.info.title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {props.book.author ?? props.book.info.author}
+            {props.book.info.author}
           </Typography>
           {props.book.returnDate && <Typography variant="subtitle2" color="text.secondary">
             {props.book.returnDate}<br />

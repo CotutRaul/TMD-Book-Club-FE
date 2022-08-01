@@ -31,6 +31,7 @@ export const MyBooks = () => {
   return (
     <div>
       <div className={classes.headerLayer} >
+        {console.log()}
         <h1>My Books:</h1>
         <Button className={classes.addButton} type="submit" variant="outlined" onClick={() => { setOpenAddBookPopup(true) }}>Add book</Button>
       </div>
