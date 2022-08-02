@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react'
-import { BookList } from '../../componets/BookList'
+import { BookList } from '../../components/BookList'
 import { getMyRented } from '../../services/userService'
 import { useSelector } from "react-redux"
 import { ExtendRentPopup } from '../../features/ExtendRentPopup'

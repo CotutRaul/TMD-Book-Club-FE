@@ -4,8 +4,8 @@ import { useSelector } from "react-redux"
 import { Home } from './pages/Home/Home';
 import { Login } from './pages/Login/Login';
 import { MyBooks } from './pages/Profile/MyBooks'
-import { NavBar } from './componets/NavBar';
-import { SimpleBar } from './componets/SimpleBar';
+import { NavBar } from './components/NavBar';
+import { SimpleBar } from './components/SimpleBar';
 import { MyRented } from './pages/Profile/MyRented';
 
 
