@@ -65,17 +65,18 @@ export const AddBookPopup = (props) => {
                                 label="Title"
                                 type="text"
                                 value={bookDataInput.title}
+                                sx={{width: "300px", marginTop: "20px"}}
                                 onChange={e => setBookDataInput({ ...bookDataInput, title: e.target.value })}
                             />
-                            <br />
                             <TextField
                                 id="authorField"
                                 label="Author"
                                 type="text"
                                 value={bookDataInput.author}
+                                sx={{width: "300px", marginTop: "20px"}}
                                 onChange={e => setBookDataInput({ ...bookDataInput, author: e.target.value })}
                             />
-                            <Button variant="outlined" onClick={handleClick}>Add Book</Button>
+                            <Button sx={{marginTop: "20px"}} variant="outlined" onClick={handleClick}>Add Book</Button>
                         </Box>
                     </div>
                 </Box>
