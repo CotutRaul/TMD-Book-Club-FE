@@ -39,3 +39,18 @@ export const addRent = async (props) => {
     }
     return null
 }
+
+
+export const getDateWhenBookWillBeAvailable = async (props) => {
+    const url = apiUrl + `/availableDate?bookId=${props.bookId}`
+
+    const response = await axios.get(url)        
+    
+    if (response.status === 200) {
+        return response.data
+    }
+    if (response.status === 204) {
+        return "Is available"
+    }
+    return null
+}

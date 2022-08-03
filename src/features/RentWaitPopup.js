@@ -9,7 +9,7 @@ import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 import { useSelector } from "react-redux"
 import { BookCard } from '../components/BookCard';
-import { addRent } from '../services/rentsService'
+import { addRent, getDateWhenBookWillBeAvailable } from '../services/rentsService'
 import { addWaitList } from '../services/waitListService'
 import { useNavigate } from "react-router-dom";
 
@@ -42,8 +42,7 @@ export const RentWaitPopup = (props) => {
             addRent({ userId: user.id, bookId: props.book.id, period: weeks })
         }
         if (weeks !== "") {
-            if(fetchData())
-            {
+            if (fetchData()) {
                 handleClose()
                 navigate('/myRented');
             }
@@ -60,6 +59,18 @@ export const RentWaitPopup = (props) => {
         handleClose()
 
     };
+
+    const [date, setDate] = useState("");
+    const availableDate = () => {
+
+        const fetchData = async () => {
+            setDate(await getDateWhenBookWillBeAvailable({ bookId: props.book.id }))
+        }
+        if(fetchData()){
+            return date
+        }
+    }
+
 
     useEffect(() => {
         setOpen(props.open)
@@ -100,7 +111,15 @@ export const RentWaitPopup = (props) => {
                                     <br />
                                     <Button variant="outlined" onClick={handleRentClick}>Rent</Button>
                                 </FormControl>}
-                                {props.book?.available === false && <Button variant="outlined" onClick={handleWaitClick}>Wait book</Button>}
+                                {props.book?.available === false &&
+                                    <>
+                                        <Typography id="wait-time" variant="h6" component="h6">
+                                            {`Book will be available from: ${availableDate()}`}
+                                        </Typography>
+                                        <br/>
+                                        <Button variant="outlined" onClick={handleWaitClick}>Wait book</Button>
+                                    </>
+                                }
                             </Box>
                         </div>
                     </div>
