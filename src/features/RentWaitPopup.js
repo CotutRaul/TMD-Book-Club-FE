@@ -57,7 +57,7 @@ export const RentWaitPopup = (props) => {
         }
         await fetchData()
         handleClose()
-
+        navigate('/myWaitingList');
     };
 
     const [date, setDate] = useState("");

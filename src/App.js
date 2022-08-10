@@ -6,6 +6,7 @@ import { Login } from './pages/Login/Login';
 import { MyBooks } from './pages/Profile/MyBooks'
 import { NavBar } from './components/NavBar';
 import { MyRented } from './pages/Profile/MyRented';
+import { MyWaitingList } from './pages/Profile/MyWaitingList';
 
 
 
@@ -25,6 +26,7 @@ export const App = () => {
           <Route path='/' exact element={checkIfLogin() ? <Home /> : <Login />} />
           <Route path='/myBooks' exact element={checkIfLogin() ? <MyBooks /> : <Login />} />
           <Route path='/myRented' exact element={checkIfLogin() ? <MyRented /> : <Login />}/>
+          <Route path='/myWaitingList' exact element={checkIfLogin() ? <MyWaitingList /> : <Login />}/>
         </Routes>
       </div>
     </Router>

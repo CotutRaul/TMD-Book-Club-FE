@@ -16,7 +16,7 @@ import { logout } from "../state/slices/userSlice"
 
 
 
-const settings = ['My books', 'My rented', 'Logout'];
+const settings = ['My books', 'My rented', 'My waiting list','Logout'];
 
 export const NavBar = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -37,6 +37,9 @@ export const NavBar = () => {
     }
     if (event === "My rented") {
       navigate('/myRented');
+    }
+    if (event === "My waiting list") {
+      navigate('/myWaitingList');
     }
     if (event === "Logout") {
       dispatch(logout())
