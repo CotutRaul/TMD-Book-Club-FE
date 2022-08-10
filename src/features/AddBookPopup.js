@@ -28,12 +28,12 @@ export const AddBookPopup = (props) => {
 
     const handleClose = () => { setOpen(false); props.action(false); };
 
-    const handleClick = () => {
+    const handleClick = async () => {
         const fetchData = async () => {
-            addBook({ id: user.id, bookInfo: { title: bookDataInput.title, author: bookDataInput.author } })
+            await addBook({ id: user.id, bookInfo: { title: bookDataInput.title, author: bookDataInput.author } })
         }
         if (bookDataInput.title !== "" && bookDataInput.author !== "") {
-            fetchData()
+            await fetchData()
             handleClose()
         }
         else {

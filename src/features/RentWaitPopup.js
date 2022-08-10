@@ -37,25 +37,25 @@ export const RentWaitPopup = (props) => {
 
     const handleClose = () => { setOpen(false); props.action(false, null); setWeeks("") };
 
-    const handleRentClick = () => {
+    const handleRentClick = async () => {
         const fetchData = async () => {
-            addRent({ userId: user.id, bookId: props.book.id, period: weeks })
+            await addRent({ userId: user.id, bookId: props.book.id, period: weeks })
+
         }
         if (weeks !== "") {
-            if (fetchData()) {
-                handleClose()
-                navigate('/myRented');
-            }
+            await fetchData()
+            handleClose()
+            navigate('/myRented');
         }
         else {
             alert("Select period")
         }
     };
-    const handleWaitClick = () => {
+    const handleWaitClick = async() => {
         const fetchData = async () => {
-            addWaitList({ userId: user.id, bookId: props.book.id })
+            await addWaitList({ userId: user.id, bookId: props.book.id })
         }
-        fetchData()
+        await fetchData()
         handleClose()
 
     };
@@ -66,7 +66,7 @@ export const RentWaitPopup = (props) => {
         const fetchData = async () => {
             setDate(await getDateWhenBookWillBeAvailable({ bookId: props.book.id }))
         }
-        if(fetchData()){
+        if (fetchData()) {
             return date
         }
     }
@@ -116,7 +116,7 @@ export const RentWaitPopup = (props) => {
                                         <Typography id="wait-time" variant="h6" component="h6">
                                             {`Book will be available from: ${availableDate()}`}
                                         </Typography>
-                                        <br/>
+                                        <br />
                                         <Button variant="outlined" onClick={handleWaitClick}>Wait book</Button>
                                     </>
                                 }

@@ -29,14 +29,13 @@ export const ExtendRentPopup = (props) => {
 
     const handleClose = () => { setOpen(false); props.action(false, null); setWeeks("") };
 
-    const handleClick = () => {
+    const handleClick = async () => {
         const fetchData = async () => {
-            extendRent({ id: props.book.id, period: weeks })
+            await extendRent({ id: props.book.id, period: weeks })
         }
         if (weeks !== "") {
-            if(fetchData()){
-                handleClose()
-            }
+            await fetchData()
+            handleClose()
         }
         else {
             alert("Select period")
