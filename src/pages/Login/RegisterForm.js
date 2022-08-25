@@ -4,7 +4,7 @@ import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { makeStyles } from '@mui/styles'
-import { addUser } from '../../services/userService'
+import { authenticateRegister } from '../../services/userService'
 import { useDispatch } from "react-redux"
 import { login } from "../../state/slices/userSlice"
 
@@ -25,7 +25,7 @@ export const RegisterForm = () => {
         if (userDataInput.name.length * userDataInput.email.length * userDataInput.password.length > 0) {
 
             const fetchData = async () => {
-                setResult(await addUser(userDataInput))
+                setResult(await authenticateRegister(userDataInput))
             }
 
             fetchData()

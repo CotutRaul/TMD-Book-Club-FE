@@ -13,6 +13,7 @@ import BookIcon from '@mui/icons-material/Book';
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom";
 import { logout } from "../state/slices/userSlice"
+import Cookies from 'js-cookie';
 
 
 
@@ -43,6 +44,7 @@ export const NavBar = () => {
     }
     if (event === "Logout") {
       dispatch(logout())
+      Cookies.remove("jwt")
       navigate('/')
     }
     setAnchorElUser(null);

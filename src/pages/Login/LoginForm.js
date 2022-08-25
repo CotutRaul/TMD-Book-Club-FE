@@ -4,7 +4,7 @@ import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { makeStyles } from '@mui/styles'
-import { getUserByEmailAndPassword } from '../../services/userService'
+import { authenticateLogin } from '../../services/userService'
 import { useDispatch } from "react-redux"
 import { login } from "../../state/slices/userSlice"
 
@@ -24,7 +24,7 @@ export const LoginForm = () => {
         e.preventDefault();
 
         const fetchData = async () => {
-            setResult(await getUserByEmailAndPassword({ email: userDataInput.email, password: userDataInput.password }))
+            setResult(await authenticateLogin({ email: userDataInput.email, password: userDataInput.password }))
         }
 
         fetchData()

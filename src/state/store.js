@@ -1,14 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit"
 import userReducer from "./slices/userSlice"
 import { combineReducers } from "redux";
-import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
+import { CookieStorage } from 'redux-persist-cookie-storage'
+import Cookies from 'js-cookie';
 import thunk from 'redux-thunk';
 
 
 const persistConfig = {
     key: 'root',
-    storage,
+    storage: new CookieStorage(Cookies/*, options */)
 }
 const reducers = combineReducers({
     user: userReducer
