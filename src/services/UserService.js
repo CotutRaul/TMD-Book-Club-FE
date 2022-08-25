@@ -1,13 +1,17 @@
 import axios from "axios"
+import Cookies from 'js-cookie';
 
-const apiUrl = 'http://localhost:8080/users'
+
+const instance = axios.create({
+    baseURL: 'http://localhost:8080/users',
+    headers: { 'Authorization': `Bearer ${Cookies.get("jwt")}`, }
+});
+
 
 
 
 export const getUserByEmailAndPassword = async (props) => {
-    const url = apiUrl + `?email=${props.email}&password=${props.password}`
-
-    const response = await axios.get(url)
+    const response = await instance.get(`?email=${props.email}&password=${props.password}`)
 
     if (response.status === 200) {
         return response.data
@@ -22,7 +26,7 @@ export const getUserByEmailAndPassword = async (props) => {
 
 
 export const addUser = async (props) => {
-    const response = await axios.post(apiUrl, props)
+    const response = await instance.post("", props)
         .catch(error => {
             if (error.response.status === 400) {
                 alert("Wrong data inserted!")
@@ -38,8 +42,7 @@ export const addUser = async (props) => {
 }
 
 export const addBook = async (props) => {
-    const url = apiUrl + `?id=${props.id}`
-    const response = await axios.post(url, props.bookInfo)
+    const response = await instance.post(`?id=${props.id}`, props.bookInfo)
         .catch(error => {
             if (error.response.status === 400) {
                 alert("Wrong data inserted!")
@@ -58,8 +61,7 @@ export const addBook = async (props) => {
 }
 
 export const getMyBooks = async (props) => {
-    const url = apiUrl + '/myBooks?id=' + props.id
-    const response = await axios.get(url)
+    const response = await instance.get(`/myBooks?id=${props.id}`)
     if (response.status === 200) {
         return response.data
     }
@@ -69,8 +71,7 @@ export const getMyBooks = async (props) => {
 }
 
 export const getMyRented = async (props) => {
-    const url = apiUrl + '/myRented?id=' + props.id
-    const response = await axios.get(url)
+    const response = await instance.get(`/myRented?id=${props.id}`)
     if (response.status === 200) {
         return response.data
     }

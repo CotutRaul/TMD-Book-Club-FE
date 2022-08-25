@@ -1,12 +1,15 @@
 import axios from "axios"
+import Cookies from 'js-cookie';
 
 
-const apiUrl = "http://localhost:8080/waitLists"
+const instance = axios.create({
+    baseURL: 'http://localhost:8080/waitLists',
+    headers: { 'Authorization': `Bearer ${Cookies.get("jwt")}`, }
+});
+
 
 export const addWaitList = async (props) => {
-    const url = apiUrl + `?userId=${props.userId}&bookId=${props.bookId}`
-
-    const response = await axios.post(url)        
+    const response = await instance.post(`?userId=${props.userId}&bookId=${props.bookId}`)        
     .catch(error => {
         if (error.response.status === 400) {
             alert("Add to waiting List unsuccessful")
@@ -20,9 +23,7 @@ export const addWaitList = async (props) => {
 }
 
 export const getWaitListForUser = async (props) => {
-    const url = apiUrl + `?userId=${props.userId}`
-
-    const response = await axios.get(url)        
+    const response = await instance.get(`?userId=${props.userId}`)        
 
     if (response.status === 200) {
         return response.data
@@ -31,9 +32,7 @@ export const getWaitListForUser = async (props) => {
 }
 
 export const deleteWaitList = async (props) => {
-    const url = apiUrl + `?id=${props.id}`
-
-    const response = await axios.delete(url)        
+    const response = await instance.delete(`?id=${props.id}`)        
 
     if (response.status === 200) {
         alert("Book deleted from waiting list successfully")
