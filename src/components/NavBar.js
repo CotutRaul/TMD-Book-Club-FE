@@ -13,11 +13,11 @@ import BookIcon from '@mui/icons-material/Book';
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom";
 import { logout } from "../state/slices/userSlice"
-import Cookies from 'js-cookie';
+import { deauthenticate } from '../state/slices/jwtSlice';
 
 
 
-const settings = ['My books', 'My rented', 'My waiting list','Logout'];
+const settings = ['My books', 'My rented', 'My waiting list', 'Logout'];
 
 export const NavBar = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -44,7 +44,7 @@ export const NavBar = () => {
     }
     if (event === "Logout") {
       dispatch(logout())
-      Cookies.remove("jwt")
+      dispatch(deauthenticate())
       navigate('/')
     }
     setAnchorElUser(null);

@@ -1,20 +1,21 @@
 import axios from "axios"
-import Cookies from 'js-cookie';
+import { store } from "../state/store"
 
-
-const instance = axios.create({
-    baseURL: 'http://localhost:8080/waitLists',
-    headers: { 'Authorization': `Bearer ${Cookies.get("jwt")}`, }
-});
+const instance = () => {
+    return axios.create({
+        baseURL: 'http://localhost:8080/waitLists',
+        headers: { 'Authorization': `Bearer ${store.getState().jwt.value}`, }
+    });
+}
 
 
 export const addWaitList = async (props) => {
-    const response = await instance.post(`?userId=${props.userId}&bookId=${props.bookId}`)        
-    .catch(error => {
-        if (error.response.status === 400) {
-            alert("Add to waiting List unsuccessful")
-        }
-    })
+    const response = await instance().post(`?userId=${props.userId}&bookId=${props.bookId}`)
+        .catch(error => {
+            if (error.response.status === 400) {
+                alert("Add to waiting List unsuccessful")
+            }
+        })
 
     if (response.status === 201) {
         return response.data
@@ -23,7 +24,7 @@ export const addWaitList = async (props) => {
 }
 
 export const getWaitListForUser = async (props) => {
-    const response = await instance.get(`?userId=${props.userId}`)        
+    const response = await instance().get(`?userId=${props.userId}`)
 
     if (response.status === 200) {
         return response.data
@@ -32,12 +33,12 @@ export const getWaitListForUser = async (props) => {
 }
 
 export const deleteWaitList = async (props) => {
-    const response = await instance.delete(`?id=${props.id}`)        
+    const response = await instance().delete(`?id=${props.id}`)
 
     if (response.status === 200) {
         alert("Book deleted from waiting list successfully")
     }
-    if(response.status === 204){
+    if (response.status === 204) {
         alert("Book deleted from waiting list unsuccessfully")
     }
     return null

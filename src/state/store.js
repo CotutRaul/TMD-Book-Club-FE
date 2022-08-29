@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit"
 import userReducer from "./slices/userSlice"
+import jwtReducer from "./slices/jwtSlice"
 import { combineReducers } from "redux";
 import { persistReducer, persistStore } from 'redux-persist';
 import { CookieStorage } from 'redux-persist-cookie-storage'
@@ -12,7 +13,8 @@ const persistConfig = {
     storage: new CookieStorage(Cookies/*, options */)
 }
 const reducers = combineReducers({
-    user: userReducer
+    user: userReducer,
+    jwt: jwtReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers)

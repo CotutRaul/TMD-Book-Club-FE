@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState } from 'react'
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -7,14 +7,13 @@ import { makeStyles } from '@mui/styles'
 import { authenticateRegister } from '../../services/userService'
 import { useDispatch } from "react-redux"
 import { login } from "../../state/slices/userSlice"
+import { authenticate } from '../../state/slices/jwtSlice';
 
 
 
 export const RegisterForm = () => {
     const [userDataInput, setUserDataInput] = useState({ name: "", email: "", password: "" });
-    const [result, setResult] = useState(null);
     const dispatch = useDispatch()
-    const isInitialMount = useRef(true);
     const classes = useStyle()
 
 
@@ -25,20 +24,17 @@ export const RegisterForm = () => {
         if (userDataInput.name.length * userDataInput.email.length * userDataInput.password.length > 0) {
 
             const fetchData = async () => {
-                setResult(await authenticateRegister(userDataInput))
+                doAction(await authenticateRegister(userDataInput))
             }
 
             fetchData()
         }
     }
 
-    useEffect(() => {
-        if (isInitialMount.current) {
-            isInitialMount.current = false;
-        } else {
-            dispatch(login(result))
-        }
-    }, [result])
+    const doAction = (result) => {
+        dispatch(authenticate(result.jwt));
+        dispatch(login(result.user));
+    };
 
 
     return (
@@ -71,7 +67,7 @@ export const RegisterForm = () => {
                     />
                 </div>
                 <div className={classes.FormGroup}><Button type='submit' variant="outlined">Register</Button></div>
-                <br/>
+                <br />
             </Paper>
         </form>
     )
