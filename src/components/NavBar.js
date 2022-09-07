@@ -19,7 +19,7 @@ import { deauthenticate } from '../state/slices/jwtSlice';
 
 const settings = ['My books', 'My rented', 'My waiting list', 'Logout'];
 
-export const NavBar = () => {
+export const NavBar = (props) => {
   const [anchorElUser, setAnchorElUser] = useState(null);
 
   const user = useSelector((state) => state.user.value)
@@ -45,6 +45,7 @@ export const NavBar = () => {
     if (event === "Logout") {
       dispatch(logout())
       dispatch(deauthenticate())
+      clearTimeout(props.timeOut)
       navigate('/')
     }
     setAnchorElUser(null);
